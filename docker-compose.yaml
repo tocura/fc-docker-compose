@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: db
+    image: mysql:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "fc-mysql"
+    ports:
+      - "3306:3306"
+    # you can comment the volumes if you don't want to persist the data
+    # saved in mysql in your pc
+    volumes:
+      - fc-mysql-data:/var/lib/mysql
+    networks:
+      - internal
+
+volumes:
+  fc-mysql-data:
+
+networks:
+  internal:
+    driver: bridge
