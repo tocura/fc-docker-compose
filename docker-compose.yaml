@@ -16,6 +16,7 @@ services:
     # saved in mysql in your pc
     volumes:
       - fc-mysql-data:/var/lib/mysql
+      - ./mysql:/docker-entrypoint-initdb.d
     networks:
       - internal
 
