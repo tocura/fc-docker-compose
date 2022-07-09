@@ -19,6 +19,21 @@ services:
       - ./mysql:/docker-entrypoint-initdb.d
     networks:
       - internal
+  app:
+    build: 
+      context: nodejs
+    container_name: app
+    tty: true
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh node index.js
+    ports:
+      - 3000:3000
+    volumes:
+      - ./nodejs:/usr/src/app
+    networks:
+      - internal
+    depends_on:
+      - db
+    
 
 volumes:
   fc-mysql-data:
