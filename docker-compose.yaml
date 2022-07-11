@@ -26,7 +26,7 @@ services:
     tty: true
     entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh node index.js
     volumes:
-      - ./nodejs:/usr/src/app
+      - nodejs:/usr/src/app
     networks:
       - internal
     depends_on:
@@ -45,6 +45,7 @@ services:
 
 volumes:
   fc-mysql-data:
+  nodejs:
 
 networks:
   internal:
